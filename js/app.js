@@ -1,12 +1,10 @@
 //Array that holds the cards cardsArray.
 const cardsArray = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-bicycle", "fa-leaf", "fa-bomb", "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-bicycle", "fa-leaf", "fa-bomb"];
-
 const cardsList = document.querySelectorAll(".card");
-
 const cardContent = document.querySelectorAll(".card i");
-
 let openedCardsList = [];
-
+let moves = document.querySelector(".moves");
+let movesCount = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -19,36 +17,29 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
-}
-
+  }
 // Open the card when clicked
 function showCard(card) {
   card.classList.add("open", "show");
 }
-
 //Add the card to opened cards list
 function addToOpenedList(card) {
   openedCardsList.push(card);
 }
-
 //Remove all cards from opened cards List
 function removeFromOpendList(openedCardsList) {
   for(let i=0 ; i< openedCardsList.length ; i++ ){
     openedCardsList.pop();
   }
  }
-
 //If cards are matched add class "match"
 function matchedCards(firstCard, secondCard) {
   setTimeout(function(){
     firstCard.classList.add("match");
     secondCard.classList.add("match");
   }, 600);
-
 }
-
 //If cards are not matched reclose them.
 function notMatchedCards(firstCard, secondCard) {
   setTimeout(function(){
@@ -56,7 +47,6 @@ function notMatchedCards(firstCard, secondCard) {
     secondCard.classList.remove("show" , "open");
   }, 800);
  }
-
  // Check if cards are matched
  function checkCardsMatch(openedCardsList) {
    let firstCard = openedCardsList[0].firstElementChild.className;
@@ -68,7 +58,20 @@ function notMatchedCards(firstCard, secondCard) {
    }
    removeFromOpendList(openedCardsList);
  }
-
+ // Display the increment of the move counter
+ function moveIncreament(moves, movesCount) {
+   moves.textContent = movesCount;
+  }
+  // Function to restart the game
+  function resetCards(carrdsArray) {
+    movesCount = 0;
+    moveIncreament(moves, movesCount);
+    for (let i = 0; i < cardsArray.length; i++) {
+      cardsList[i].className = "card";
+      cardContent[i].removeAttribute("class");
+      cardContent[i].classList.add("fa", carrdsArray[i]);
+    }
+  }
 //Loop through each card and change its HTML
  for (let i = 0; i < cardsList.length; i++) {
      cardsList[i].addEventListener("click", function(e) {
@@ -78,6 +81,8 @@ function notMatchedCards(firstCard, secondCard) {
            if (openedCardsList.length == 1) {
              showCard(cardsList[i]);
              addToOpenedList(cardsList[i]);
+             movesCount++;
+             moveIncreament(moves, movesCount);
              checkCardsMatch(openedCardsList);
              removeFromOpendList(openedCardsList);
            } else {
@@ -88,9 +93,14 @@ function notMatchedCards(firstCard, secondCard) {
        }
      });
     }
+// Click to restatr the Game
+reset.addEventListener("click", function() {
+    shuffle(cardsArray);
+    resetCards(cardsArray);
+});
 
 /*
-//// TODO:
-////       -Add restart function
-////       -Add moves counter function
+// TODO:
+        -set a timer
+        -final score
 */
