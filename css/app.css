@@ -28,9 +28,10 @@ body {
     flex-direction: column;
 }
 
-h1 {
+.head h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    color:  #aa7ecd;
 }
 
 /*
@@ -81,6 +82,7 @@ h1 {
     font-size: 33px;
 }
 
+
 /*
  * Styles for the Score Panel
  */
@@ -101,9 +103,32 @@ h1 {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+    color: gold;
 }
 
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.finish-game{
+  width: 90%;
+  min-height: 800px;
+  display: none;
+  box-shadow: 5px 2px 20px 0 rgba(0, 0, 0, 0.26);
+}
+
+.finish-game{
+  display: block;
+  z-index: 10;
+  background-color: #fff;
+  position: absolute;
+  -webkit-transform: translate(0, -99999px);
+  transform: translate(0, -99999px);
+  transition: transform 2s ease;
+}
+
+.finish-game.view{
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
 }

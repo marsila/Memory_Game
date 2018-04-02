@@ -11,23 +11,31 @@
 <body>
 
     <div class="container">
-        <header>
+      <div class="finish-game">
+        <p>Congrats!! You Won!!!! </p>
+        <p id ="timer"></p>
+        <button type="button" name="play-again" onclick="playAgain()">Play again</button>
+      </div>
+        <header class="head">
             <h1>Matching Game</h1>
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
+        	<ul class="stars" id ="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
         	<span class="moves">0</span> Moves
-
             <div class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
+
+        <!-- <section class="timer">
+          <span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
+        </section> -->
 
         <ul class="deck">
             <li class="card">

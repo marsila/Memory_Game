@@ -5,8 +5,11 @@ const cardContent = document.querySelectorAll(".card i");
 const reset = document.querySelector(".restart");
 const openedCardsList = [];
 const moves = document.querySelector(".moves");
+const finishGame = document.querySelector(".finish-game");
+const stars = document.getElementById("stars");
 let movesCount = 0;
-
+let matchedCardsCount = 0;
+let starsCount = 3;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -38,13 +41,14 @@ function matchedCards(firstCard, secondCard) {
     firstCard.className = "card match";
     secondCard.className = "card match";
   }, 600);
+  matchedCardsCount += 2;
 }
 //If cards are not matched reclose them.
 function notMatchedCards(firstCard, secondCard) {
   setTimeout(function(){
     firstCard.classList.remove("show", "open");
     secondCard.classList.remove("show" , "open");
-  }, 800);
+  }, 600);
  }
  // Check if cards are matched
  function checkIfCardsMatch() {
@@ -63,8 +67,36 @@ function notMatchedCards(firstCard, secondCard) {
  function setMoveCounter() {
    moves.textContent = movesCount;
   }
+  //
+  function changeStarsColor() {
+    if (movesCount > 10) {
+      stars.children[2].style.color = "rgba(0, 0, 0, 0.26)";
+      starsCount = 2;
+    }
+    if(movesCount > 15) {
+      stars.children[1].style.color = "rgba(0, 0, 0, 0.26)";
+      starsCount = 1;
+    }
+
+  }
+  // Check if the game is  finished
+  function checkIfTheGameFinished() {
+    if (matchedCardsCount == cardsArray.length) {
+      return true;
+    }
+    return false;
+  }
+  //finish the Game
+  function finishTheGame() {
+    finishGame.classList.add("view");
+    document.getElementById("timer").innerHTML =` you got ${starsCount} stars, with ${movesCount} moves`
+  }
   // Function to restart the game
   function resetCards(carrdsArray) {
+    matchedCardsCount = 0;
+    for (var i = 0; i < stars.children.length; i++) {
+      stars.children[i].style.color = "gold";
+    }
     movesCount = 0;
     setMoveCounter();
     for (let i = 0; i < cardsArray.length; i++) {
@@ -76,9 +108,9 @@ function notMatchedCards(firstCard, secondCard) {
 //Loop through each card and change its HTML
  for (let i = 0; i < cardsList.length; i++) {
    let card=cardsList[i];
-     card.addEventListener("click", function(e) {
-       //Check if the card is already open or has "match" class
-       if(card.className === "card"){
+   card.addEventListener("click", function(e) {
+   //Check if the card is already open
+   if(card.className === "card"){
          showCard(card);
          addToOpenedList(card);
          if (openedCardsList.length == 2) {
@@ -86,7 +118,11 @@ function notMatchedCards(firstCard, secondCard) {
            setMoveCounter();
            checkIfCardsMatch();
            clearOpendList();
+           changeStarsColor();
+           if(checkIfTheGameFinished()){
+             finishTheGame();
            }
+         }
        }
      });
     }
@@ -95,9 +131,9 @@ reset.addEventListener("click", function() {
     shuffle(cardsArray);
     resetCards(cardsArray);
 });
-
-/*
-// TODO:
-        -set a timer
-        -final score
-*/
+//play agin button
+function playAgain() {
+  finishGame.classList.remove("view");
+  shuffle(cardsArray);
+  resetCards(cardsArray);
+};
