@@ -39,8 +39,8 @@ body {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 80%;
+    min-height: 100%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -53,8 +53,9 @@ body {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 80px;
+    width: 40%;
+    margin: 5px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -95,7 +96,8 @@ body {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    /* width: 345px; */
+    width: 70%;
     margin-bottom: 10px;
 }
 

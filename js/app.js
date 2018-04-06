@@ -11,6 +11,12 @@ const wonStars = document.getElementById("stars-result");
 let movesCount = 0;
 let matchedCardsCount = 0;
 let starsCount = 3;
+window.onload = function () {
+  const newCards = shuffle(cardsArray);
+  for (let i = 0; i < newCards.length; i++) {
+    cardContent[i].classList.add(newCards[i]);
+  }
+}
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -104,7 +110,12 @@ function notMatchedCards(firstCard, secondCard) {
     const result = document.getElementById("result");
     finishGame.classList.add("view");
     setWonStars();
-    result.innerHTML =` You got ${starsCount} stars, with ${movesCount} moves!`;
+    let stars = "stars";
+    if (starsCount <2) {
+      stars = "star";
+    }
+      result.innerHTML =` You got ${starsCount} ${stars}, with ${movesCount} moves!`;
+
   }
   // Function to restart the game
   function resetCards(carrdsArray) {
