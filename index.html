@@ -12,8 +12,15 @@
 
     <div class="container">
       <div class="finish-game">
-        <p>Congrats!! You Won!!!! </p>
-        <p id ="timer"></p>
+        <h1>Congrats!! You Won!!!! </h1>
+        <section>
+          <ul class="stars-result" id ="stars-result">
+        		<li><i class="fa fa-star"></i></li>
+        		<li><i class="fa fa-star"></i></li>
+        		<li><i class="fa fa-star"></i></li>
+        	</ul>
+        </section>
+        <p id ="result">You got</p>
         <button type="button" name="play-again" onclick="playAgain()">Play again</button>
       </div>
         <header class="head">
@@ -32,10 +39,6 @@
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
-
-        <!-- <section class="timer">
-          <span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
-        </section> -->
 
         <ul class="deck">
             <li class="card">

@@ -78,8 +78,14 @@ body {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
     font-size: 33px;
+    -webkit-animation-name: bounce;
+    animation-name: bounce;
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+    animation-duration: 1s;
+    background: #02ccba;
+
 }
 
 
@@ -111,24 +117,170 @@ body {
     cursor: pointer;
 }
 
+/* style for finish-game div */
 .finish-game{
-  width: 90%;
+  width: 95%;
   min-height: 800px;
   display: none;
   box-shadow: 5px 2px 20px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  background: #e4e4e9 url('../img/geometry2.png') ;
+  text-align: center;
 }
 
 .finish-game{
   display: block;
   z-index: 10;
-  background-color: #fff;
   position: absolute;
-  -webkit-transform: translate(0, -99999px);
-  transform: translate(0, -99999px);
+  -webkit-transform: translateY(-9999px);
+  transform: translateY(-9999px);
   transition: transform 2s ease;
 }
 
 .finish-game.view{
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.finish-game h1{
+  color: #341f84;
+  margin-top: 5em;
+}
+
+.stars-result{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.stars-result li{
+  list-style: none;
+  display: inline-block;
+  padding: 1px;
+  color: #888788;
+  text-shadow: 5px 3px 10px rgba(0, 0, 0, 0.29);
+  font-size: 3em;
+
+}
+.won-stars {
+  -webkit-animation-name: won;
+  animation-name: won;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+  animation-duration: 2s;
+}
+
+@keyframes won {
+  from
+  {
+    -webkit-transform: scale(-1);
+    transform: scale(-1);
+    color: gold;
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    color: gold;
+  }
+  90%,
+  to {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    color: gold;
+  }
+
+}
+
+.finish-game button{
+  border-radius: 8px;
+  box-shadow: 5px 2px 20px 0 #63588c;
+  background-color: #341f84;
+  color: #ffffff;
+  padding: 0.6em;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.finish-game button:hover{
+  padding: 0.75em;
+  background-color: #711b76;
+  box-shadow: 5px 2px 20px 0 #711b76;
+}
+
+@keyframes bounce {
+  from,
+  20%,
+  50%,
+  80%,
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+  }
+
+  40%,
+  33% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+
+  70% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+
+  90% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+    background: #aa7ecd;
+  }
+}
+
+@keyframes shake {
+  from,
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    background: #f70835;
+  }
+
+  10% {
+    -webkit-transform: rotate(-10deg) ;
+    transform: rotateY(-10deg) ;
+  }
+
+  20% {
+    -webkit-transform: rotate(7deg);
+    transform: rotate(7deg) ;
+  }
+
+30% {
+    -webkit-transform: rotate(-4deg) ;
+    transform: rotate(-4deg) ;
+  }
+
+  40% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+
+  }
+ to,
+  50% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    background: #f70835;
+  }
+}
+
+.shake {
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-name: shake;
+  animation-name: shake;
+  animation-duration: 1s;
 }

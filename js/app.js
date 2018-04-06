@@ -7,6 +7,7 @@ const openedCardsList = [];
 const moves = document.querySelector(".moves");
 const finishGame = document.querySelector(".finish-game");
 const stars = document.getElementById("stars");
+const wonStars = document.getElementById("stars-result");
 let movesCount = 0;
 let matchedCardsCount = 0;
 let starsCount = 3;
@@ -37,18 +38,20 @@ function clearOpendList() {
  }
 //If cards are matched add class "match"
 function matchedCards(firstCard, secondCard) {
-  setTimeout(function(){
+
     firstCard.className = "card match";
     secondCard.className = "card match";
-  }, 600);
+
   matchedCardsCount += 2;
 }
 //If cards are not matched reclose them.
 function notMatchedCards(firstCard, secondCard) {
+  firstCard.classList.add("shake");
+  secondCard.classList.add("shake");
   setTimeout(function(){
-    firstCard.classList.remove("show", "open");
-    secondCard.classList.remove("show" , "open");
-  }, 600);
+    firstCard.classList.remove("show", "open", "shake");
+    secondCard.classList.remove("show" , "open", "shake");
+  }, 800);
  }
  // Check if cards are matched
  function checkIfCardsMatch() {
@@ -73,7 +76,7 @@ function notMatchedCards(firstCard, secondCard) {
       stars.children[2].style.color = "rgba(0, 0, 0, 0.26)";
       starsCount = 2;
     }
-    if(movesCount > 15) {
+    if(movesCount > 17) {
       stars.children[1].style.color = "rgba(0, 0, 0, 0.26)";
       starsCount = 1;
     }
@@ -86,10 +89,22 @@ function notMatchedCards(firstCard, secondCard) {
     }
     return false;
   }
+  //set styles for stars after finishing the game
+  function setWonStars(){
+    setTimeout(function () {
+      for (var i = 0; i < starsCount; i++) {
+        wonStars.children[i].className = "won-stars";
+        wonStars.children[i].style.color = "gold";
+      }
+    },2000);
+
+  }
   //finish the Game
   function finishTheGame() {
+    const result = document.getElementById("result");
     finishGame.classList.add("view");
-    document.getElementById("timer").innerHTML =` you got ${starsCount} stars, with ${movesCount} moves`
+    setWonStars();
+    result.innerHTML =` You got ${starsCount} stars, with ${movesCount} moves!`;
   }
   // Function to restart the game
   function resetCards(carrdsArray) {
@@ -126,6 +141,13 @@ function notMatchedCards(firstCard, secondCard) {
        }
      });
     }
+//Remove stars styles
+function removeWonStars() {
+  for (var i = 0; i < wonStars.children.length; i++) {
+    wonStars.children[i].removeAttribute("style");
+    wonStars.children[i].removeAttribute("class");
+  }
+}
 // Click to restatr the Game
 reset.addEventListener("click", function() {
     shuffle(cardsArray);
@@ -134,6 +156,7 @@ reset.addEventListener("click", function() {
 //play agin button
 function playAgain() {
   finishGame.classList.remove("view");
+  removeWonStars();
   shuffle(cardsArray);
   resetCards(cardsArray);
 };
