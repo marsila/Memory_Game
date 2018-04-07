@@ -21,9 +21,9 @@ window.onload = function() {
   }
 };
 /**
-* @description Shuffle function from http://stackoverflow.com/a/2450976
-* @param {Array} array - description
-*/
+ * @description Shuffle function from http://stackoverflow.com/a/2450976
+ * @param {Array} array - description
+ */
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue, randomIndex;
@@ -51,10 +51,8 @@ function clearOpendList() {
 }
 //If cards are matched add class "match"
 function matchedCards(firstCard, secondCard) {
-
   firstCard.className = "card match";
   secondCard.className = "card match";
-
   matchedCardsCount += 2;
 }
 //If cards are not matched reclose them.
@@ -83,7 +81,7 @@ function checkIfCardsMatch() {
 function setMoveCounter() {
   moves.textContent = movesCount;
 }
-//
+//Change the color of the stars according to the moves count
 function changeStarsColor() {
   if (movesCount > 10) {
     stars.children[2].style.color = "rgba(0, 0, 0, 0.26)";
@@ -123,7 +121,6 @@ function finishTheGame() {
   }
   result.innerHTML = `You got ${starsCount} ${stars}, with ${movesCount} moves! and
       your time is: ${time} `;
-
 }
 // Function to restart the game
 function resetCards(carrdsArray) {
@@ -190,9 +187,13 @@ function checkTime() {
   }
   document.getElementById('time').innerHTML = ` ${time}`;
 }
-
+/**
+ * @description convert milliSeconds to time format
+ * @param {number} milliSeconds
+ * @returns {string} time format hh:mm:ss
+ */
 function convertTime(milliSeconds) {
-  var duration = moment.duration(milliSeconds, 'milliSeconds');
+  let duration = moment.duration(milliSeconds, 'milliSeconds');
   return duration.format("hh:mm:ss");
 }
 
