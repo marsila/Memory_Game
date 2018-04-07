@@ -19,8 +19,11 @@ window.onload = function() {
   for (let i = 0; i < newCards.length; i++) {
     cardContent[i].classList.add(newCards[i]);
   }
-}
-// Shuffle function from http://stackoverflow.com/a/2450976
+};
+/**
+* @description Shuffle function from http://stackoverflow.com/a/2450976
+* @param {Array} array - description
+*/
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue, randomIndex;
@@ -176,8 +179,7 @@ function playAgain() {
   removeWonStars();
   shuffle(cardsArray);
   resetCards(cardsArray);
-};
-
+}
 //creat a timer:
 function checkTime() {
   let timeDifference = Date.now() - initialTime;

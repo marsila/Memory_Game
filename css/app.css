@@ -39,7 +39,7 @@ body {
  */
 
 .deck {
-    width: 80%;
+    width: 93%;
     min-height: 100%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -53,9 +53,9 @@ body {
 }
 
 .deck .card {
-    height: 80px;
-    width: 40%;
-    margin: 5px;
+    height: 30px;
+    width: 20%;
+    margin: 2px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -74,12 +74,12 @@ body {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 1em;
 }
 
 .deck .card.match {
     cursor: default;
-    font-size: 33px;
+    font-size: 1em;
     -webkit-animation-name: bounce;
     animation-name: bounce;
     -webkit-transform-origin: center bottom;
@@ -96,7 +96,6 @@ body {
 
 .score-panel {
     text-align: left;
-    /* width: 345px; */
     width: 70%;
     margin-bottom: 10px;
 }
